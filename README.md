@@ -1,5 +1,13 @@
 # spark
 
+### A Tinder-style app for finding EECS partners.
+
+## About
+### Resources used:
+  - [Buefy](https://buefy.org/) - UI components
+  - [Twemoji](https://twemoji.twitter.com/) - Lightning icon
+  - [Poppins](https://fonts.google.com/specimen/Poppins#license) font
+
 ## Project setup
 ```
 npm install
@@ -13,6 +21,11 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
+```
+
+### Compiles without minification
+```
+npm run build -- --mode development
 ```
 
 ### Lints and fixes files
