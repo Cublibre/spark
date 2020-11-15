@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-
+    <Card />
   </div>
 </template>
 
 <script>
+import Card from './components/Card'
 export default {
   name: 'App',
   components: {
+    Card,
   }
 }
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Poppins');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+  @import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
   html, body {
     height: 100%;
     margin: 0;
