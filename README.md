@@ -9,6 +9,10 @@
   - [Poppins](https://fonts.google.com/specimen/Poppins#license) font
 
 ## Project setup
+
+Make sure you have the latest version of `npm` installed.
+
+In the `../spark/` directory:
 ```
 npm install
 ```
