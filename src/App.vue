@@ -1,18 +1,13 @@
 <template>
   <div id="app">
-    <Card />
+    <!-- TODO: Remove this temporary navbar -->
+    <div id="nav">
+      <router-link to="/about">About</router-link> |
+      <router-link to="/">Home</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import Card from './components/Card'
-export default {
-  name: 'App',
-  components: {
-    Card,
-  }
-}
-</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
