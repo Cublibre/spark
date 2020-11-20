@@ -3,7 +3,8 @@
     <!-- TODO: Remove this temporary navbar -->
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/search">Find a partner</router-link>
+      <router-link to="/search">Find a partner</router-link> |
+      <router-link to="/feed" v-on:keypress.13="router.push('results')">My Feed</router-link>
     </div>
     <router-view/>
   </div>
