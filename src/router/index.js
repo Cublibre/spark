@@ -14,7 +14,8 @@ function route(path, component) {
 
 const routes = [
   route('/', 'Home'),
-  route('/search', 'Search')
+  route('/search', 'Search'),
+  route('/feed', 'Feed'),
 ]
 
 const router = new VueRouter({
