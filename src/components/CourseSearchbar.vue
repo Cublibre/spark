@@ -4,9 +4,9 @@
       <b-autocomplete
         v-model="input"
         :data="filteredCourseCatalog"
+        :keep-first="true"
         placeholder="e.g. 493"
         icon="search"
-        clearable
         @select="(option) => (showFeed(option))"
       >
         <template slot="empty">No EECS classes found with that number.</template>
@@ -29,7 +29,7 @@ export default {
     showFeed(code) {
       // Show feed with filtered users- TODO: pass a course code as prop?
       console.log(`Selected course: ${code}`)
-      router.push('results')
+      router.push('feed')
     }
   },
   computed: {

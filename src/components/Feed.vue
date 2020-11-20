@@ -1,25 +1,60 @@
 <template>
   <div id="feed" class="is-flex is-flex-direction-row is-align-items-center">
     <div class="mx-6">
-      <button class="feed-button " @click="getNextUser">
-        <b-icon pack="fas" class="icon" size="is-large" type="is-danger" icon="times"></b-icon> 
+      <button class="feed-button" @click="getNextUser">
+        <b-icon
+          pack="fas"
+          class="icon"
+          size="is-large"
+          type="is-danger"
+          icon="times"
+        ></b-icon>
       </button>
     </div>
     <Card :userData="currentProfile" />
     <div class="mx-6">
-      <button class="feed-button " @click="getMatch">
-        <b-icon class="icon" pack="fas" size="is-large" type="is-success" icon="check"></b-icon>
+      <button class="feed-button" @click="getMatch">
+        <b-icon
+          class="icon"
+          pack="fas"
+          size="is-large"
+          type="is-success"
+          icon="check"
+        ></b-icon>
       </button>
     </div>
+    <!-- Match modal popup (isn't visible unless triggered) -->
+    <b-modal
+      v-model="isMatchCardModalActive"
+      :can-cancel="false"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-modal
+      custo
+    >
+      <template>
+        <div class="is-flex is-flex-direction-column mx-0">
+          <MatchCard :userData="currentProfile" />
+          <section class="container">
+            <b-button class="mt-5 mr-5" @click="$router.push('/')">Home</b-button>
+            <b-button class="mt-5" @click="getNextUser">Keep matching</b-button>
+          </section>
+        </div>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import Card from "./Card";
+import MatchCard from "./MatchCard";
 export default {
   name: "Feed",
   components: {
     Card,
+    MatchCard,
   },
   data: function () {
     const JOHN_DOE = {
@@ -47,6 +82,8 @@ export default {
           endTime: "15:00",
         },
       },
+      phone: "(123) 456-7890",
+      email: "jdoe@umich.edu",
     };
     const JANE_DOE = {
       name: "Jane Doe",
@@ -73,26 +110,30 @@ export default {
           endTime: "15:00",
         },
       },
+      phone: "(135) 789-1113",
+      email: "jadoe@umich.edu",
     };
 
     let userList = [JOHN_DOE, JANE_DOE];
     return {
       userList,
       currentProfile: userList[0],
+      isMatchCardModalActive: false,
     };
   },
   methods: {
     getMatch() {
       // TODO: Check if there's a match
-      if(this.isMatchedWithUser(/* userid */)){
-        console.log("User matched")
+      if (this.isMatchedWithUser(/* userid */)) {
+        console.log("User matched");
         // Show match screen
-      }
-      else {
+        this.isMatchCardModalActive = true;
+      } else {
         this.getNextUser();
       }
     },
     getNextUser: function () {
+      this.isMatchCardModalActive = false;
       // Move to next card
       // TODO: Show screen when out of people
       if (this.userList.length > 1) {
@@ -106,30 +147,43 @@ export default {
     isMatchedWithUser: function (/* userid */) {
       // TODO: query database of matches using userid's
       return true;
-    }
+    },
   },
 };
 </script>
 
 <style scoped>
-  .icon{
-    position: absolute;
-    font-size: 150%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
-  }
+.icon {
+  position: absolute;
+  font-size: 150%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
 
-  .feed-button {
-    position: relative;
-    height: 65px;
-    width: 65px;
-    border-radius: 50%;
-    -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-    background: white;
-    border: solid 1px transparent;
-  }
+.feed-button {
+  position: relative;
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  background: white;
+  border: solid 1px transparent;
+}
+
+.feed-button:focus {
+  outline: 0px;
+}
+
+.feed-button:hover {
+  transform: scale(1.1);
+}
+
+.feed-button:active {
+  transform: scale(0.95);
+  filter: brightness(90%);
+}
 </style>
