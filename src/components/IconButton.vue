@@ -1,5 +1,5 @@
 <template>
-  <button class="icon-button">
+  <button class="mx-6 icon-button">
     <b-icon
       pack="fas"
       class="icon"

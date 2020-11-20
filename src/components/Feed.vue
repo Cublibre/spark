@@ -1,12 +1,8 @@
 <template>
   <div id="feed" class="is-flex is-flex-direction-row is-align-items-center">
-    <div class="mx-6">
       <IconButton @click.native="getNextUser" type="is-danger" icon="times" />
-    </div>
     <Card :userData="currentProfile" />
-    <div class="mx-6">
       <IconButton @click.native="getMatch" type="is-success" icon="check" />
-    </div>
     <!-- Match modal popup (isn't visible unless triggered) -->
     <b-modal
       v-model="isMatchCardModalActive"
@@ -22,7 +18,9 @@
         <div class="is-flex is-flex-direction-column mx-0">
           <MatchCard :userData="currentProfile" />
           <section class="container">
-            <b-button class="mt-5 mr-5" @click="$router.push('/')">Home</b-button>
+            <b-button class="mt-5 mr-5" @click="$router.push('/')"
+              >Home</b-button
+            >
             <b-button class="mt-5" @click="getNextUser">Keep matching</b-button>
           </section>
         </div>
@@ -33,78 +31,23 @@
 
 <script>
 import Card from "./Card";
-import MatchCard from "./MatchCard"
+import MatchCard from "./MatchCard";
 import IconButton from "./IconButton";
 export default {
   name: "Feed",
   components: {
     Card,
     IconButton,
-    MatchCard
+    MatchCard,
+  },
+  created () {
+    const classQuery = this.$route.query.class;
+    this.getFilteredUsers(classQuery);
   },
   data: function () {
-    const JOHN_DOE = {
-      name: "John Doe",
-      major: "Computer Science",
-      year: "2020",
-      imageUrl:
-        "https://post.greatist.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
-      courses: {
-        "EECS 485": true,
-        "EECS 493": true,
-        "EECS 376": true,
-      },
-      workdays: {
-        monday: {
-          startTime: "14:00",
-          endTime: "18:00",
-        },
-        wednesday: {
-          startTime: "10:00",
-          endTime: "12:00",
-        },
-        thursday: {
-          startTime: "13:00",
-          endTime: "15:00",
-        },
-      },
-      phone: "(123) 456-7890",
-      email: "jdoe@umich.edu",
-    };
-    const JANE_DOE = {
-      name: "Jane Doe",
-      major: "Computer Science",
-      year: "2021",
-      imageUrl:
-        "https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg",
-      courses: {
-        "EECS 482": true,
-        "EECS 442": true,
-        "EECS 493": true,
-      },
-      workdays: {
-        tuesday: {
-          startTime: "10:00",
-          endTime: "12:00",
-        },
-        wednesday: {
-          startTime: "13:00",
-          endTime: "17:00",
-        },
-        friday: {
-          startTime: "13:00",
-          endTime: "15:00",
-        },
-      },
-      phone: "(135) 789-1113",
-      email: "jadoe@umich.edu",
-    };
-
-    let userList = [JOHN_DOE, JANE_DOE];
-
     return {
-      userList,
-      currentProfile: userList[0],
+      userList: [],
+      currentProfile: {},
       isMatchCardModalActive: false,
     };
   },
@@ -135,6 +78,83 @@ export default {
       // TODO: query database of matches using userid's
       return true;
     },
+    getFilteredUsers(query) {
+      // TODO: Get user list from database
+      const JOHN_DOE = {
+        name: "John Doe",
+        major: "Computer Science",
+        year: "2020",
+        imageUrl:
+          "https://post.greatist.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg",
+        courses: {
+          "EECS 485": true,
+          "EECS 493": true,
+          "EECS 376": true,
+        },
+        workdays: {
+          monday: {
+            startTime: "14:00",
+            endTime: "18:00",
+          },
+          wednesday: {
+            startTime: "10:00",
+            endTime: "12:00",
+          },
+          thursday: {
+            startTime: "13:00",
+            endTime: "15:00",
+          },
+        },
+        phone: "(123) 456-7890",
+        email: "jdoe@umich.edu",
+      };
+      const JANE_DOE = {
+        name: "Jane Doe",
+        major: "Computer Science",
+        year: "2021",
+        imageUrl:
+          "https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg",
+        courses: {
+          "EECS 482": true,
+          "EECS 442": true,
+          "EECS 493": true,
+        },
+        workdays: {
+          tuesday: {
+            startTime: "10:00",
+            endTime: "12:00",
+          },
+          wednesday: {
+            startTime: "13:00",
+            endTime: "17:00",
+          },
+          friday: {
+            startTime: "13:00",
+            endTime: "15:00",
+          },
+        },
+        phone: "(135) 789-1113",
+        email: "jadoe@umich.edu",
+      };
+
+      const USER_LIST = [JOHN_DOE, JANE_DOE];
+      
+      this.userList = USER_LIST.filter((user_obj) => {
+        let courses = Object.keys(user_obj.courses)
+        console.log(`${user_obj.name}'s courses: ${courses}`)
+        return courses.includes("EECS " + query)
+      });
+
+      if(this.userList.length > 0) {
+        this.currentProfile = this.userList[0];
+      } else {
+        console.log("No users found")
+        // TODO: Show alert to user
+      }
+    },
+  },
+  computed: {
+    
   },
 };
 </script>
