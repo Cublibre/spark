@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import router from '@/router'
 import Card from "./Card";
 export default {
   name: "Feed",
@@ -84,13 +85,14 @@ export default {
   methods: {
     getMatch() {
       // TODO: Check if there's a match
-      if(this.isMatchedWithUser(/* userid */)){
-        console.log("User matched")
+      //if(this.isMatchedWithUser(/* userid */)){
+        //console.log("User matched")
         // Show match screen
-      }
-      else {
-        this.getNextUser();
-      }
+      //}
+      //else {
+        //this.getNextUser();
+      //}
+      router.push('match')
     },
     getNextUser: function () {
       // Move to next card

@@ -29,7 +29,7 @@ export default {
     showFeed(code) {
       // Show feed with filtered users- TODO: pass a course code as prop?
       console.log(`Selected course: ${code}`)
-      router.push('results')
+      router.push('feed')
     }
   },
   computed: {
