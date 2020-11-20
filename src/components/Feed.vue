@@ -1,15 +1,11 @@
 <template>
   <div id="feed" class="is-flex is-flex-direction-row is-align-items-center">
     <div class="mx-6">
-      <button class="feed-button " @click="getNextUser">
-        <b-icon pack="fas" class="icon" size="is-large" type="is-danger" icon="times"></b-icon> 
-      </button>
+      <IconButton @click.native="getNextUser" type="is-danger" icon="times" />
     </div>
     <Card :userData="currentProfile" />
     <div class="mx-6">
-      <button class="feed-button " @click="getMatch">
-        <b-icon class="icon" pack="fas" size="is-large" type="is-success" icon="check"></b-icon>
-      </button>
+      <IconButton @click.native="getMatch" type="is-success" icon="check" />
     </div>
   </div>
 </template>
@@ -17,10 +13,12 @@
 <script>
 import router from '@/router'
 import Card from "./Card";
+import IconButton from "./IconButton";
 export default {
   name: "Feed",
   components: {
     Card,
+    IconButton,
   },
   data: function () {
     const JOHN_DOE = {
@@ -77,6 +75,7 @@ export default {
     };
 
     let userList = [JOHN_DOE, JANE_DOE];
+
     return {
       userList,
       currentProfile: userList[0],
@@ -112,26 +111,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .icon{
-    position: absolute;
-    font-size: 150%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
-  }
-
-  .feed-button {
-    position: relative;
-    height: 65px;
-    width: 65px;
-    border-radius: 50%;
-    -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-    background: white;
-    border: solid 1px transparent;
-  }
-</style>
