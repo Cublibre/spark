@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    <!-- TODO: Remove this temporary navbar -->
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/search">Find a partner</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
