@@ -12,7 +12,7 @@
           <h4 class="subtitle is-4 mb-3">
             {{ userData.major }}, '{{ userData.year.substring(2) }}
           </h4>
-          <CourseList :courses="classList" />
+          <CourseList :courses="userData.courses" />
           <h6 class="subtitle ml-1 is-7 mb-2 has-text-success">
             <b-icon icon="calendar-check" size="is-small"></b-icon>
             Hover to see available times
@@ -35,12 +35,6 @@ export default {
     Avatar,
     CourseList,
     Schedule,
-  },
-  computed: {
-    classList: function () {
-      // Get a list of the class names (since their values are all true)
-      return Object.keys(this.userData.courses);
-    },
   },
 };
 </script>
