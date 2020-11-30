@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card is-flex-direction-column">
     <div
       class="container columns is-mobile is-variable is-align-items-center is-justify-content-center"
     >
@@ -21,6 +21,9 @@
         </div>
       </div>
     </div>
+    <div v-if="isExpanded">
+      {{ userData.bio }}
+    </div>
   </div>
 </template>
 
@@ -30,7 +33,7 @@ import CourseList from "./CourseList.vue";
 import Schedule from "./Schedule.vue";
 export default {
   name: "Card",
-  props: ["userData"],
+  props: ["userData", "isExpanded"],
   components: {
     Avatar,
     CourseList,
@@ -43,10 +46,8 @@ export default {
 .card {
   display: flex;
   background: white;
-  width: 600px;
-  height: 350px;
   overflow: hidden;
-  padding: 30px;
+  padding: 45px;
   border-radius: 15px;
   -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);

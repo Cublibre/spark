@@ -4,7 +4,7 @@
       Hi {{ currentUser.name.split(' ')[0] }}!
     </h1>
     <!--<div class="home has-background-white has-text-centered"></div> -->
-    <Card :userData="currentUser" />
+    <Card :userData="currentUser" :isExpanded="true" />
     <div class="container is-flex is-justify-content-center">
       <b-button
         @click="logout"
