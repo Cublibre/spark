@@ -18,7 +18,7 @@
 <script>
 export default {
   name: "CourseSearchbar",
-  props: ['courseCodes'],
+  props: ['courses'],
   data: function () {
     return {
       input: "",
@@ -38,7 +38,10 @@ export default {
           option.toString().toLowerCase().indexOf(this.input.toString().toLowerCase()) >= 0
         );
       });
-    }
+    },
+    courseCodes () {
+      return Object.keys(this.courses)
+    },
   },
 };
 </script>

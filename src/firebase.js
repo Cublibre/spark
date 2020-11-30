@@ -25,6 +25,7 @@ export const auth = firebase.auth()
 
 // references to collections
 export const userCollection = db.collection('users')
+export const eecsCollection = db.collection('eecs')
 
 // Export types that exists in Firestore
 // This is not always necessary, but it's used in other examples
