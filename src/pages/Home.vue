@@ -1,43 +1,49 @@
 <template>
   <div v-if="currentUser">
     <h1 class="title is-1 has-text-centered has-text-white mb-1">
-      Hi {{ currentUser.name.split(' ')[0] }}!
+      Hi {{ currentUser.name.split(" ")[0] }}!
     </h1>
     <!--<div class="home has-background-white has-text-centered"></div> -->
-    <Card :userData="currentUser" />
-    <div class="container is-flex is-justify-content-center">
-      <b-button
-        @click="logout"
-        rounded
-        size="is-medium"
-        class="mt-5 mx-3 has-text-weight-semibold poppins"
-        type="is-danger"
-        icon-pack="fas"
-        icon-right="sign-out-alt"
-      >
-      </b-button>
-      <router-link :to="{ name: 'Profile' }"
-        ><b-button
+    <Card :userData="currentUser" :isExpanded="true" />
+    <div class="container mt-5 is-mobile columns">
+      <div class="column">
+        <b-button
+          @click="logout"
           rounded
           size="is-medium"
-          class="mt-5 mx-3 has-text-weight-semibold poppins"
-          type="is-info"
-          icon-pack="fas"
-          icon-left="user-edit"
-          >Edit profile
-        </b-button></router-link
-      >
-      <router-link :to="{ name: 'Search' }"
-        ><b-button
-          rounded
-          size="is-medium"
-          class="mt-5 mx-3 has-text-weight-semibold poppins"
-          type="is-primary"
+          class="has-text-weight-semibold poppins"
+          type="is-danger"
           icon-pack="fas"
           icon-left="sign-out-alt"
-          >Find a partner
-        </b-button></router-link
-      >
+        > Log out
+        </b-button>
+      </div>
+      <div class="column">
+        <router-link :to="{ name: 'Profile' }"
+          ><b-button
+            rounded
+            size="is-medium"
+            class="has-text-weight-semibold poppins"
+            type="is-info"
+            icon-pack="fas"
+            icon-left="user-edit"
+            >Edit profile
+          </b-button></router-link
+        >
+      </div>
+      <div class="column">
+        <router-link :to="{ name: 'Search' }"
+          ><b-button
+            rounded
+            size="is-medium"
+            class="has-text-weight-semibold poppins"
+            type="is-primary"
+            icon-pack="fas"
+            icon-left="sign-out-alt"
+            >Find a partner
+          </b-button></router-link
+        >
+      </div>
     </div>
   </div>
   <div v-else class="is-size-1 has-text-white">Loading...</div>
