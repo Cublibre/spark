@@ -22,7 +22,17 @@
       </div>
     </div>
     <div v-if="isExpanded">
-      {{ userData.bio }}
+      <h4 class="title is-4">About me</h4>
+      <div class="extended columns">
+        <div class="column scrollable">
+          <template v-if="userData.bio">
+            {{ userData.bio }}
+          </template>
+          <template v-else>
+            <em>No information.</em>
+          </template>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -45,6 +55,7 @@ export default {
 <style scoped>
 .card {
   display: flex;
+  width: 550px;
   background: white;
   overflow: hidden;
   padding: 45px;
@@ -52,5 +63,39 @@ export default {
   -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  transition: transform .2s ease;
+}
+
+.extended {
+  max-height: 150px;
+}
+
+.scrollable {
+  overflow-y: hidden;
+}
+
+.scrollable:hover {
+  overflow-y: overlay;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  width: 5px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+  width: 5px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 </style>
