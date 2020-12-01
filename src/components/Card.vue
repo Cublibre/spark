@@ -21,19 +21,21 @@
         </div>
       </div>
     </div>
-    <div v-if="isExpanded">
-      <h4 class="title is-4">About me</h4>
-      <div class="extended columns">
-        <div class="column scrollable">
-          <template v-if="userData.bio">
-            {{ userData.bio }}
-          </template>
-          <template v-else>
-            <em>No information.</em>
-          </template>
+    <b-collapse v-model="isExpanded" animation="slide">
+      <div>
+        <h4 class="title is-4">About me</h4>
+        <div class="extended columns">
+          <div class="column scrollable">
+            <template v-if="userData.bio">
+              {{ userData.bio }}
+            </template>
+            <template v-else>
+              <em>No information.</em>
+            </template>
+          </div>
         </div>
       </div>
-    </div>
+    </b-collapse>
   </div>
 </template>
 
@@ -63,7 +65,7 @@ export default {
   -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
-  transition: transform .2s ease;
+  transition: transform 0.2s ease;
 }
 
 .extended {
