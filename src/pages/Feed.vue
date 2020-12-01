@@ -2,11 +2,17 @@
   <div
     id="feed"
     v-if="currentProfile"
-    class="is-flex is-flex-direction-row is-align-items-center"
+    class="is-flex is-flex-direction-column is-align-items-center"
   >
-    <IconButton @click.native="getNextUser" type="is-danger" icon="times" />
-    <Card :userData="currentProfile" />
-    <IconButton @click.native="getMatch" type="is-success" icon="check" />
+    <div class="is-flex is-flex-direction-row is-align-items-center">
+      <IconButton @click.native="getNextUser" type="is-danger" icon="times" />
+      <Card :userData="currentProfile" :isExpanded="toggleExpanded" />
+      <IconButton @click.native="getMatch" type="is-success" icon="check" />
+    </div>
+    <div class="mt-5">
+      <b-button class="poppins has-text-weight-semibold" rounded v-if="!toggleExpanded" @click="expandProfile" type="is-info">More Info</b-button>
+      <b-button class="poppins has-text-weight-semibold" rounded v-else @click="expandProfile" type="is-info is-light">Less Info</b-button>
+    </div>
     <!-- Match modal popup (isn't visible unless triggered) -->
     <b-modal
       v-model="isMatchCardModalActive"
@@ -31,6 +37,7 @@
       </template>
     </b-modal>
   </div>
+  <div v-else class="is-size-1 has-text-white">Loading...</div>
 </template>
 
 <script>
@@ -53,6 +60,7 @@ export default {
     return {
       userList: [],
       isMatchCardModalActive: false,
+      toggleExpanded: false,
     };
   },
   methods: {
@@ -102,6 +110,10 @@ export default {
 
       return users;
     },
+    expandProfile: function () {
+      this.toggleExpanded = this.toggleExpanded ? false : true
+      console.log(this.toggleExpanded)
+    },
   },
   computed: {
     currentProfile: {
@@ -112,3 +124,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.poppins {
+  font-family: "Poppins", "Helvetica", sans-serif;
+}
+</style>

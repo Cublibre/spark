@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card is-flex-direction-column">
     <div
       class="container columns is-mobile is-variable is-align-items-center is-justify-content-center"
     >
@@ -21,6 +21,21 @@
         </div>
       </div>
     </div>
+    <b-collapse v-model="isExpanded" animation="slide">
+      <div>
+        <h4 class="title is-4">About me</h4>
+        <div class="extended columns">
+          <div class="column scrollable">
+            <template v-if="userData.bio">
+              {{ userData.bio }}
+            </template>
+            <template v-else>
+              <em>No information.</em>
+            </template>
+          </div>
+        </div>
+      </div>
+    </b-collapse>
   </div>
 </template>
 
@@ -30,7 +45,7 @@ import CourseList from "./CourseList.vue";
 import Schedule from "./Schedule.vue";
 export default {
   name: "Card",
-  props: ["userData"],
+  props: ["userData", "isExpanded"],
   components: {
     Avatar,
     CourseList,
@@ -42,14 +57,47 @@ export default {
 <style scoped>
 .card {
   display: flex;
-  background: white;
   width: 600px;
-  height: 350px;
+  background: white;
   overflow: hidden;
-  padding: 30px;
+  padding: 45px;
   border-radius: 15px;
   -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.extended {
+  max-height: 150px;
+}
+
+.scrollable {
+  overflow-y: hidden;
+}
+
+.scrollable:hover {
+  overflow-y: overlay;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  width: 5px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+  width: 5px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 </style>
