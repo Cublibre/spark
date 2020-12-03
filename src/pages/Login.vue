@@ -50,7 +50,7 @@ export default {
               } else {
                 // doc.data() will be undefined in this case
                 console.log("No profile, redirecting to create profile");
-                self.$router.push({ name:'Create' })
+                self.$router.push({ name:'Profile' })
               }
             })
             .catch(function (error) {

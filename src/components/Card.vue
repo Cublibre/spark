@@ -1,5 +1,5 @@
 <template>
-  <div class="card is-flex-direction-column">
+  <div class="card is-flex-direction-column has-background-white">
     <div
       class="container columns is-mobile is-variable is-align-items-center is-justify-content-center"
     >
@@ -10,7 +10,12 @@
         <div class="ml-3">
           <h1 class="title is-1 has-text-weight-bold">{{ userData.name }}</h1>
           <h4 class="subtitle is-4 mb-3">
-            {{ userData.major }}, '{{ userData.year.substring(2) }}
+            <template v-if="userData.major">
+              {{ userData.major }},
+            </template>
+            <template v-if="userData.year">
+              '{{ userData.year.substring(2) }}
+            </template>
           </h4>
           <CourseList :courses="userData.courses" />
           <h6 class="subtitle ml-1 is-7 mb-2 has-text-success">
@@ -30,7 +35,7 @@
               {{ userData.bio }}
             </template>
             <template v-else>
-              <em>No information.</em>
+              <em>No bio provided.</em>
             </template>
           </div>
         </div>
