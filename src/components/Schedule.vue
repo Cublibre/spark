@@ -41,7 +41,8 @@ export default {
       var week = new Array(7);
       for (const weekday in this.availableDays) {
         // week[weekday] = [startTime, endTime]
-        week[index[weekday]] = Object.values(this.availableDays[weekday]);
+        const availableTimes = this.availableDays[weekday]
+        week[index[weekday]] = [availableTimes.begin, availableTimes.end];
       }
       return week;
     },

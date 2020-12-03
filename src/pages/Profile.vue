@@ -275,7 +275,7 @@ export default {
             var strToDate = (s) => {
               var d = new Date();
               d.setHours(s.substr(0, 2));
-              d.setMinutes(s.substr(4, 6));
+              d.setMinutes(s.substr(3, 5));
               return d;
             };
             times.begin = strToDate(times.begin);
