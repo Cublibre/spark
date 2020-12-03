@@ -1,8 +1,25 @@
 <template>
   <div id="app">
+    <div style="position: absolute; top: 0; left: 0" class="mt-6">
+      <IconButton
+        v-if="this.$router.currentRoute.name !== 'Login'"
+        @click.native="$router.push('/')"
+        type="is-primary"
+        icon="home"
+      />
+    </div>
     <router-view />
   </div>
 </template>
+
+<script>
+import IconButton from "@/components/IconButton";
+export default {
+  components: {
+    IconButton,
+  },
+};
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
