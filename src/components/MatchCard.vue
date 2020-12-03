@@ -6,7 +6,7 @@
         <section class="box">
           <h2 class="title is-2 has-text-weight-bold">{{ userData.name }}</h2>
           <b class="">Contact Info</b>
-          <p>{{ userData.phone }}</p>
+          <p v-if="userData.phone">{{ userData.phone }}</p>
           <p>{{ userData.email }}</p>
         </section>
       </div>

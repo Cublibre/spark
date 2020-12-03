@@ -10,8 +10,22 @@
       <IconButton @click.native="getMatch" type="is-success" icon="check" />
     </div>
     <div class="mt-5">
-      <b-button class="poppins has-text-weight-semibold" rounded v-if="!toggleExpanded" @click="expandProfile" type="is-info">More Info</b-button>
-      <b-button class="poppins has-text-weight-semibold" rounded v-else @click="expandProfile" type="is-info is-light">Less Info</b-button>
+      <b-button
+        class="poppins has-text-weight-semibold"
+        rounded
+        v-if="!toggleExpanded"
+        @click="expandProfile"
+        type="is-info"
+        >More Info</b-button
+      >
+      <b-button
+        class="poppins has-text-weight-semibold"
+        rounded
+        v-else
+        @click="expandProfile"
+        type="is-info is-light"
+        >Less Info</b-button
+      >
     </div>
     <!-- Match modal popup (isn't visible unless triggered) -->
     <b-modal
@@ -36,6 +50,8 @@
         </div>
       </template>
     </b-modal>
+
+    <!-- Match modal popup (isn't visible unless triggered) -->
   </div>
   <div v-else class="is-size-1 has-text-white">Loading...</div>
 </template>
@@ -44,7 +60,7 @@
 import Card from "@/components/Card";
 import MatchCard from "@/components/MatchCard";
 import IconButton from "@/components/IconButton";
-import { userCollection } from "@/firebase";
+import { firestore, auth, userCollection } from "@/firebase";
 export default {
   name: "Feed",
   components: {
@@ -65,29 +81,41 @@ export default {
   },
   methods: {
     getMatch() {
-      // TODO: Check if there's a match
-      if (this.isMatchedWithUser(/* userid */)) {
+      if (this.isMatchedWithUser(auth.currentUser.uid)) {
         console.log("User matched");
-        // Show match screen
         this.isMatchCardModalActive = true;
       } else {
+        // Add the user's uid to my invites
+        var user = auth.currentUser;
+        var userDoc = userCollection.doc(user.uid);
+        var currentProfileUid = this.currentProfile.uid
+        userDoc.update({
+          liked: firestore.FieldValue.arrayUnion(currentProfileUid)
+        })
         this.getNextUser();
       }
     },
     getNextUser: function () {
       this.isMatchCardModalActive = false;
       // Move to next card
-      // TODO: Show screen when out of people
       if (this.userList.length > 1) {
         this.userList.shift();
       } else {
-        console.log("No more users in queue");
-        // TODO: Show a screen saying there are no more users
+        this.$buefy.dialog.confirm({
+          title: "No more users in queue",
+          message:
+            "We have run out of possible matches for you. Check back later to see if anyone new is looking for a spark!",
+          cancelText: "Back to Search",
+          confirmText: "Home",
+          type: "is-primary",
+          onCancel: () => this.$router.push({ name: "Search" }),
+          onConfirm: () => this.$router.push({ name: "Home" }),
+        });
       }
     },
-    isMatchedWithUser: function (/* userid */) {
-      // TODO: query database of matches using userid's
-      return true;
+    isMatchedWithUser: function (uid) {
+      // returns true if the user with uid has currentUser's uid in their list.
+      return this.currentProfile.liked.includes(uid);
     },
     getUsers: function (courseNum) {
       /**
@@ -100,19 +128,20 @@ export default {
         .then(function (result) {
           result.forEach(function (doc) {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            users.push(doc.data());
+            // don't add currently logged in user
+            if (doc.id === auth.currentUser.uid) return;
+            users.push({...doc.data(), uid: doc.id});
           });
         })
         .catch(function (error) {
           console.log("Error getting users: ", error);
         });
-
+      // Filter out users that I already liked
       return users;
     },
     expandProfile: function () {
-      this.toggleExpanded = this.toggleExpanded ? false : true
-      console.log(this.toggleExpanded)
+      this.toggleExpanded = this.toggleExpanded ? false : true;
+      console.log(this.toggleExpanded);
     },
   },
   computed: {

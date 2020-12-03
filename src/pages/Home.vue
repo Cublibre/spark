@@ -1,7 +1,7 @@
 <template>
   <div v-if="currentUser">
-    <h1 class="title is-1 has-text-centered has-text-white mb-1">
-      Hi {{ currentUser.name.split(" ")[0] }}!
+    <h1 class="title is-1 has-text-centered has-text-white">
+      your profile
     </h1>
     <!--<div class="home has-background-white has-text-centered"></div> -->
     <Card :userData="currentUser" :isExpanded="true" />
@@ -67,8 +67,8 @@ export default {
   },
   methods: {
     getCurrentUser() {
-      // FIXME: use signed in user's uid. if no profile found, redirect to create
-      var userDoc = userCollection.doc("c003adS57ugEg1vRMkId");
+      var user = auth.currentUser
+      var userDoc = userCollection.doc(user.uid);
       var self = this; // this is not available in auth()
       userDoc.get().then(function (doc) {
         if (doc.exists) {
@@ -76,6 +76,7 @@ export default {
           self.currentUser = doc.data();
         } else {
           console.log("Profile not found");
+          self.$router.push({ name: "Profile" })
         }
       });
     },
@@ -84,7 +85,6 @@ export default {
       auth
         .signOut()
         .then(function () {
-          // TODO: Prompt "Are you sure?"
           console.log("Logged out");
           self.$router.push({ name: "Login" });
         })

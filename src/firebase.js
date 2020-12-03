@@ -21,13 +21,9 @@ const firebaseConfig = {
 // Initialize firebase app with config and firestore instance
 firebase.initializeApp(firebaseConfig)
 export const db = firebase.firestore()
+export const firestore = firebase.firestore
 export const auth = firebase.auth()
 
 // references to collections
 export const userCollection = db.collection('users')
 export const eecsCollection = db.collection('eecs')
-
-// Export types that exists in Firestore
-// This is not always necessary, but it's used in other examples
-const { Timestamp, GeoPoint } = firebase.firestore
-export { Timestamp, GeoPoint }

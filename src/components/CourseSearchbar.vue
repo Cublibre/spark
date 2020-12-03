@@ -2,6 +2,7 @@
   <section class="searchbar">
     <b-field>
       <b-autocomplete
+        rounded
         v-model="input"
         :data="filteredCourseCatalog"
         :keep-first="true"
