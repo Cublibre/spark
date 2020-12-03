@@ -4,12 +4,12 @@
     v-if="currentProfile"
     class="is-flex is-flex-direction-column is-align-items-center"
   >
-    <section style="position: absolute; top: 48px; left: 100px;">
+    <section style="position: absolute; top: 48px; left: 100px; z-index:30 !important">
       <IconButton @click.native="toggleInstructions = !toggleInstructions" type="is-info" icon="question" />
       <b-message
         class="mt-3"
         style="width: 400px"
-        title="How to use"
+        title="How to find a partner"
         v-model="toggleInstructions"
         aria-close-label="Close message"
         type="is-info"
@@ -28,19 +28,23 @@
     <div class="mt-5" style="position: relative">
       <b-button
         class="poppins has-text-weight-semibold"
+        icon-pack="fas"
+        icon-left="chevron-circle-down"
         rounded
         v-if="!toggleExpanded"
         @click="expandProfile"
         type="is-info"
-        >More Info</b-button
+        >More about {{ currentProfile.name.split(' ')[0] }}</b-button
       >
       <b-button
         class="poppins has-text-weight-semibold"
+        icon-pack="fas"
+        icon-left="chevron-circle-up"
         rounded
         v-else
         @click="expandProfile"
         type="is-info is-light"
-        >Less Info</b-button
+        >Less about {{ currentProfile.name.split(' ')[0] }}</b-button
       >
     </div>
     <!-- Match modal popup (isn't visible unless triggered) -->
