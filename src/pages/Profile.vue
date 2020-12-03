@@ -83,7 +83,7 @@
                 ellipsis
                 icon-pack="fas"
                 icon="chalkboard"
-                placeholder="enter course codes e.g. 493"
+                placeholder="enter an eecs course"
                 aria-close-label="Delete this tag"
                 :data="filteredCourses"
                 autocomplete
@@ -305,6 +305,7 @@ export default {
     },
     getFilteredCourses(input) {
       this.filteredCourses = this.courseNames.filter((option) => {
+        input = input.replace(/^\D+/g, "")
         return (
           option.code.toString().toLowerCase().indexOf(input.toLowerCase()) >= 0
         );

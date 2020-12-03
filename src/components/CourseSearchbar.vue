@@ -35,8 +35,9 @@ export default {
     filteredCourseCatalog () {
       /* Show the matching course codes in the dropdown based on input. */
       return this.courseCodes.filter((option) => {
+        var input = this.input.replace(/^\D+/g, "")
         return (
-          option.toString().toLowerCase().indexOf(this.input.toString().toLowerCase()) >= 0
+          option.toString().toLowerCase().indexOf(input.toString().toLowerCase()) >= 0
         );
       });
     },
