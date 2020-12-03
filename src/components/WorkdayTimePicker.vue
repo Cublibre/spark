@@ -22,6 +22,7 @@
             :position="'is-top-' + timePickerDirection"
             :incrementMinutes="15"
             :focusable="false"
+            :default-minutes="0"
           >
           </b-timepicker>
         </b-field>
@@ -33,6 +34,7 @@
             placeholder="end time"
             :incrementMinutes="15"
             :focusable="false"
+            :default-minutes="0"
           >
           </b-timepicker>
         </b-field>

@@ -153,7 +153,7 @@ When do you like to start projects / homework?"
         icon-pack="fas"
         icon-left="save"
       >
-        Save
+        Save and continue
       </b-button>
     </div>
   </div>
