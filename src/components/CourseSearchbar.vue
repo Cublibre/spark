@@ -6,7 +6,7 @@
         v-model="input"
         :data="filteredCourseCatalog"
         :keep-first="true"
-        placeholder="Enter an EECS course number ex. 493"
+        placeholder="Enter an EECS course"
         icon="search"
         @select="(option) => onSelected(option)"
       >

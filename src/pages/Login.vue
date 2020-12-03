@@ -5,7 +5,9 @@
         <p>spark</p>
       </div>
     </div>
-    <h4 class="subtitle is-4 has-text-white has-text-bold mt-3 mb-0">Matchmaking for EECS students.</h4>
+    <h4 class="subtitle is-4 has-text-white has-text-bold mt-3 mb-0">
+      Matchmaking for EECS students.
+    </h4>
     <b-button
       @click="login"
       rounded
@@ -14,9 +16,8 @@
       icon-pack="fab"
       icon-left="google"
       type="is-success"
-      >Sign in
+      >Sign in with Google
     </b-button>
-    
   </div>
 </template>
 
@@ -46,11 +47,18 @@ export default {
             .then(function (doc) {
               if (doc.exists) {
                 console.log("Profile found, redirecting to home...");
-                self.$router.push({ name:'Home' })
+                self.$router.push({ name: "Home" });
               } else {
                 // doc.data() will be undefined in this case
                 console.log("No profile, redirecting to create profile");
-                self.$router.push({ name:'Profile' })
+                self.$buefy.notification.open({
+                  indefinite: true,
+                  message: `<b>welcome to spark!</b><br/> we created your profile for you. be sure to enter which courses you want so others can find your profile when they search for courses.`,
+                  position: "is-top-right",
+                  hasIcon: true,
+                  type: "is-success",
+                });
+                self.$router.push({ name: "Profile" });
               }
             })
             .catch(function (error) {

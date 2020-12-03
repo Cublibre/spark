@@ -15,16 +15,16 @@
       <b-message
         class="mt-3"
         style="width: 400px"
-        title="How to find a partner"
+        title="find a spark"
         v-model="toggleInstructions"
         aria-close-label="Close message"
         type="is-info"
       >
         Press the
-        <b-icon pack="fas" icon="check-circle" size="is-small"> </b-icon> check
-        button if you want to be partners with this user, and the
-        <b-icon pack="fas" icon="times-circle" size="is-small"> </b-icon> other
-        button to skip. If you match, you will get their contact info.
+        <b-icon pack="fas" type="is-success" icon="check-circle" size="is-small"> </b-icon> check
+        button if you want to partner with this person, and the
+        <b-icon pack="fas" type="is-danger" icon="times-circle" size="is-small"> </b-icon> X
+        button to skip them. If you match, you will get their contact info.
         Otherwise, wait for them to match with you.
       </b-message>
     </section>
