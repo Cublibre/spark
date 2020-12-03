@@ -4,8 +4,14 @@
     v-if="currentProfile"
     class="is-flex is-flex-direction-column is-align-items-center"
   >
-    <section style="position: absolute; top: 48px; left: 100px; z-index:30 !important">
-      <IconButton @click.native="toggleInstructions = !toggleInstructions" type="is-info" icon="question" />
+    <section
+      style="position: absolute; top: 48px; left: 100px; z-index: 30 !important"
+    >
+      <IconButton
+        @click.native="toggleInstructions = !toggleInstructions"
+        type="is-info"
+        icon="question"
+      />
       <b-message
         class="mt-3"
         style="width: 400px"
@@ -16,8 +22,10 @@
       >
         Press the
         <b-icon pack="fas" icon="check-circle" size="is-small"> </b-icon> check
-        button if you want to be partners with this user, and the <b-icon pack="fas" icon="times-circle" size="is-small"> </b-icon> other button to skip.
-        If you match, you will get their contact info. Otherwise, wait for them to match with you.
+        button if you want to be partners with this user, and the
+        <b-icon pack="fas" icon="times-circle" size="is-small"> </b-icon> other
+        button to skip. If you match, you will get their contact info.
+        Otherwise, wait for them to match with you.
       </b-message>
     </section>
     <div class="is-flex is-flex-direction-row is-align-items-center">
@@ -34,7 +42,7 @@
         v-if="!toggleExpanded"
         @click="expandProfile"
         type="is-info"
-        >More about {{ currentProfile.name.split(' ')[0] }}</b-button
+        >More about {{ currentProfile.name.split(" ")[0] }}</b-button
       >
       <b-button
         class="poppins has-text-weight-semibold"
@@ -44,7 +52,7 @@
         v-else
         @click="expandProfile"
         type="is-info is-light"
-        >Less about {{ currentProfile.name.split(' ')[0] }}</b-button
+        >Less about {{ currentProfile.name.split(" ")[0] }}</b-button
       >
     </div>
     <!-- Match modal popup (isn't visible unless triggered) -->
@@ -123,7 +131,7 @@ export default {
         this.$buefy.dialog.confirm({
           title: "No more users in queue",
           message:
-            "We have run out of possible matches for you. Check back later to see if anyone new is looking for a spark!",
+            "We have run out of possible matches for you. You may get contacted by someone who matches with you. Check back later to see if anyone new is looking for a spark!",
           cancelText: "Back to Search",
           confirmText: "Home",
           type: "is-primary",

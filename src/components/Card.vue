@@ -18,9 +18,13 @@
             </template>
           </h4>
           <CourseList :courses="userData.courses" />
-          <h6 class="subtitle ml-1 is-7 mb-2 has-text-success">
+          <h6 v-if="Object.keys(userData.workdays).length > 0" class="subtitle ml-1 is-7 mb-2 has-text-success">
             <b-icon icon="calendar-check" size="is-small"></b-icon>
             Hover to see available times
+          </h6>
+          <h6 v-else class="subtitle ml-1 is-7 mb-2">
+            <b-icon icon="calendar-times" size="is-small"></b-icon>
+            No available times on record.
           </h6>
           <Schedule :availableDays="userData.workdays" />
         </div>

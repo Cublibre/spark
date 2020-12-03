@@ -16,6 +16,7 @@
       <div class="box popup">
         <b-field>
           <b-timepicker
+            editable
             v-model="workday.begin"
             placeholder="start time"
             :position="'is-top-' + timePickerDirection"
@@ -26,6 +27,7 @@
         </b-field>
         <b-field>
           <b-timepicker
+            editable
             v-model="workday.end"
             :position="'is-top-' + timePickerDirection"
             placeholder="end time"
