@@ -4,12 +4,28 @@
     v-if="currentProfile"
     class="is-flex is-flex-direction-column is-align-items-center"
   >
+    <section style="position: absolute; top: 48px; left: 100px;">
+      <IconButton @click.native="toggleInstructions = !toggleInstructions" type="is-info" icon="question" />
+      <b-message
+        class="mt-3"
+        style="width: 400px"
+        title="How to use"
+        v-model="toggleInstructions"
+        aria-close-label="Close message"
+        type="is-info"
+      >
+        Press the
+        <b-icon pack="fas" icon="check-circle" size="is-small"> </b-icon> check
+        button if you want to be partners with this user, and the <b-icon pack="fas" icon="times-circle" size="is-small"> </b-icon> other button to skip.
+        If you match, you will get their contact info. Otherwise, wait for them to match with you.
+      </b-message>
+    </section>
     <div class="is-flex is-flex-direction-row is-align-items-center">
       <IconButton @click.native="getNextUser" type="is-danger" icon="times" />
       <Card :userData="currentProfile" :isExpanded="toggleExpanded" />
       <IconButton @click.native="getMatch" type="is-success" icon="check" />
     </div>
-    <div class="mt-5">
+    <div class="mt-5" style="position: relative">
       <b-button
         class="poppins has-text-weight-semibold"
         rounded
@@ -50,8 +66,6 @@
         </div>
       </template>
     </b-modal>
-
-    <!-- Match modal popup (isn't visible unless triggered) -->
   </div>
   <div v-else class="is-size-1 has-text-white">Loading...</div>
 </template>
@@ -77,6 +91,7 @@ export default {
       userList: [],
       isMatchCardModalActive: false,
       toggleExpanded: false,
+      toggleInstructions: false,
     };
   },
   methods: {
@@ -88,10 +103,10 @@ export default {
         // Add the user's uid to my invites
         var user = auth.currentUser;
         var userDoc = userCollection.doc(user.uid);
-        var currentProfileUid = this.currentProfile.uid
+        var currentProfileUid = this.currentProfile.uid;
         userDoc.update({
-          liked: firestore.FieldValue.arrayUnion(currentProfileUid)
-        })
+          liked: firestore.FieldValue.arrayUnion(currentProfileUid),
+        });
         this.getNextUser();
       }
     },
@@ -130,7 +145,7 @@ export default {
             // doc.data() is never undefined for query doc snapshots
             // don't add currently logged in user
             if (doc.id === auth.currentUser.uid) return;
-            users.push({...doc.data(), uid: doc.id});
+            users.push({ ...doc.data(), uid: doc.id });
           });
         })
         .catch(function (error) {
