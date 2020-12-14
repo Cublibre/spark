@@ -2,6 +2,8 @@
 
 ### A Tinder-style app for finding EECS partners.
 
+This was the final project for UI our development class. Over 3 weeks we designed and implemented this project.
+
 ## About
 ### Resources used:
   - [Buefy](https://buefy.org/) - UI components
