@@ -2,6 +2,8 @@
 
 ### A Tinder-style app for finding EECS partners.
 
+## About
+
 This was the final project for UI development class, designed and prototyped over 3 weeks. Built with Vue.js frontend and a Firebase Firestore backend.
 
 **Contributors**
@@ -16,8 +18,6 @@ This was the final project for UI development class, designed and prototyped ove
   <img height=360 src="https://user-images.githubusercontent.com/40254686/116332667-2dcdcc80-a7a0-11eb-842c-8a352cfaed04.png">
   <img height=360 src="https://user-images.githubusercontent.com/40254686/116332784-653c7900-a7a0-11eb-8a0d-b93722472e03.png">
 </details>
-
-## About
 
 ## Project setup
 
