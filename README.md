@@ -8,7 +8,7 @@ This was the final project for UI development class, designed and prototyped ove
 
 **Contributors**
 - Francesca Duong
-- William Li
+- [William Li](https://github.com/willxli)
 - [Kevin Wang](https://github.com/kwwangkw)
 
 <details>
